@@ -4,7 +4,6 @@ import React from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import CoHomesLogo from "../../../images/CoHomesLogo.jpeg";
 import "./Login.css";
 
 const Login = () => {
@@ -20,7 +19,6 @@ const Login = () => {
                 <div className="login-container-div">
                     <Row>
                         <Col md={7}>
-                            <img src={CoHomesLogo} alt="" className="logo"/>
                             <h1 className="login-heading">
                                 <span className="underlineText">Let's</span>{" "}
                                 <br />
