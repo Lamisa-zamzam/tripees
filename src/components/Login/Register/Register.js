@@ -1,5 +1,5 @@
 // React
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 // React Bootstrap
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 // React Hook form
@@ -7,36 +7,52 @@ import { useForm } from "react-hook-form";
 // Router
 import { Link, useHistory, useLocation } from "react-router-dom";
 // CSS
-import "./Login.css";
-// Font Awesome
+import "../Login/Login.css";
+// Font awesome
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Login = () => {
-    // Error State
+    // Error state
+    const [password, setPassword] = useState("");
+    // Password variables, in case there is a mismatch
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [err, setErr] = useState("");
-
-    // Routing vars
-    let history = useHistory();
-    let location = useLocation();
-    let { from } = location.state || { from: { pathname: "/dashboard" } };
-
-    // If the user is already logged in, doesn't make sense to show him/her the login page again
-    useEffect(() => {
-        if (localStorage.getItem("authToken")) {
-            history.replace(from);
-        }
-    }, [history, from]);
-    // React Hook form vars
+    // React Hook form variables
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
-    // Handle submit
+
+    // Routing Variables
+    let history = useHistory();
+    let location = useLocation();
+    let { from } = location.state || { from: { pathname: "/dashboard" } };
+
+    // If the user is already logged in, doesn't make sense to show him/her the register page again
+    useEffect(() => {
+        if (localStorage.getItem("authToken")) {
+            history.replace(from);
+        }
+    }, [history, from]);
+    // Handle form submit
     const onSubmit = async (data) => {
-        // Send request to get JWT token
-        fetch("http://localhost:5000/api/auth/login", {
+        // If passwords mismatch
+        if (password !== confirmPassword) {
+            // set password fields empty
+            setPassword("");
+            setConfirmPassword("");
+            // Empty the error after 5 seconds
+            setTimeout(() => {
+                setErr("");
+            }, 5000);
+            // Set error
+            return setErr("Passwords do not match");
+        }
+
+        // Send data to save into DB
+        fetch("http://localhost:5000/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -51,7 +67,7 @@ const Login = () => {
                         setErr("");
                     }, 5000);
                 } else {
-                    // Save token in the local storage
+                    // Save token in local storage
                     localStorage.setItem("authToken", data.token);
                     // Redirect user in the requested route
                     history.replace(from);
@@ -83,15 +99,30 @@ const Login = () => {
                                 className="login-form"
                             >
                                 <Form.Group>
+                                    <Form.Label>Full Name</Form.Label>
+                                    <Form.Control
+                                        {...register("username", {
+                                            required: true,
+                                        })}
+                                        type="text"
+                                        placeholder="Enter Your Name"
+                                    />
+                                    {errors.username && (
+                                        <span className="error">
+                                            This field is required
+                                        </span>
+                                    )}
+                                </Form.Group>
+                                <Form.Group>
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
-                                        type="email"
-                                        placeholder="e.g. johndoe@gmail.com"
                                         {...register("email", {
                                             required: true,
                                         })}
+                                        type="email"
+                                        placeholder="e.g. johndoe@gmail.com"
                                     />
-                                    {errors.price && (
+                                    {errors.email && (
                                         <span className="error">
                                             This field is required
                                         </span>
@@ -101,9 +132,15 @@ const Login = () => {
                                 <Form.Group controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
+                                        {...register("password", {
+                                            required: true,
+                                        })}
                                         type="password"
                                         placeholder="Your Password"
-                                        {...register("password")}
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
                                     />
                                     {errors.password && (
                                         <span className="error">
@@ -111,17 +148,37 @@ const Login = () => {
                                         </span>
                                     )}
                                 </Form.Group>
+
+                                <Form.Group controlId="formBasicPassword">
+                                    <Form.Label>Confirm Password</Form.Label>
+                                    <Form.Control
+                                        {...register("confirmPass", {
+                                            required: true,
+                                        })}
+                                        type="password"
+                                        placeholder="Your Password"
+                                        value={confirmPassword}
+                                        onChange={(e) =>
+                                            setConfirmPassword(e.target.value)
+                                        }
+                                    />
+                                    {errors.confirmPass && (
+                                        <span className="error">
+                                            This field is required
+                                        </span>
+                                    )}
+                                </Form.Group>
                                 <Button type="submit" className="submit-button">
-                                    Login
+                                    Register
                                 </Button>
                                 <div className="accountDiv">
                                     <p>
-                                        Don't have an account?{" "}
+                                        Already have an account?{" "}
                                         <Link
                                             className="react-link"
-                                            to="/register"
+                                            to="/login"
                                         >
-                                            Sign Up
+                                            Login
                                         </Link>
                                     </p>
                                 </div>
