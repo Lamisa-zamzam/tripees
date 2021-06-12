@@ -23,7 +23,7 @@ const Dashboard = () => {
             };
             try {
                 const { data } = await axios.get(
-                    "http://localhost:5000/api/private",
+                    "https://stormy-cliffs-33775.herokuapp.com/api/private",
                     config
                 );
                 setPrivateData(data.data);

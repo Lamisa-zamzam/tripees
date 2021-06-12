@@ -36,7 +36,7 @@ const Login = () => {
     // Handle submit
     const onSubmit = async (data) => {
         // Send request to get JWT token
-        fetch("http://localhost:5000/api/auth/login", {
+        fetch("https://stormy-cliffs-33775.herokuapp.com/api/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
