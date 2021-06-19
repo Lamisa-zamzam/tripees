@@ -28,7 +28,7 @@ const SignUpOTPUser = () => {
     const onSubmit = async (data) => {
         const userData = { ...data, phone, password: "" };
         // Send data to save into DB
-        fetch("http://localhost:5000/api/auth/register", {
+        fetch("https://stormy-cliffs-33775.herokuapp.com/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData),

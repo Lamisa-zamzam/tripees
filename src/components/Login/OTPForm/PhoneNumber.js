@@ -11,7 +11,7 @@ const PhoneNumber = ({
     const [err, setErr] = useState("");
     const Continue = () => {
         setNextStep();
-        fetch("http://localhost:5000/sendOTP", {
+        fetch("https://stormy-cliffs-33775.herokuapp.com/sendOTP", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ phone: value.phone }),
