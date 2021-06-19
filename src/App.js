@@ -6,6 +6,7 @@ import Register from "./components/Login/Register/Register";
 import ForgotPassword from "./components/Login/ForgotPassword/ForgotPassword";
 import PasswordReset from "./components/Login/PasswordReset/PasswordReset";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Home from "./components/Home/Home.js";
 // Bootstrap Styles
 import "bootstrap/dist/css/bootstrap.min.css";
 // Private Route
@@ -15,6 +16,10 @@ const App = () => {
     return (
         <Router>
             <Switch>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <PrivateRoute path="/forgotPassword">

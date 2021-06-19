@@ -12,7 +12,7 @@ import "../Login/Login.css";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Login = () => {
+const Register = () => {
     // Error state
     const [password, setPassword] = useState("");
     // Password variables, in case there is a mismatch
@@ -74,6 +74,7 @@ const Login = () => {
                 }
             });
     };
+
     return (
         <div className="login-page">
             <Container className="login-container">
@@ -191,4 +192,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

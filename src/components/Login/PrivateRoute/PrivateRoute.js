@@ -1,4 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
+import Auth from "../../../auth";
 
 const PrivateRoute = ({ children, ...rest }) => {
     const token = localStorage.getItem("authToken");
@@ -6,7 +7,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         <Route
             {...rest}
             render={({ location }) =>
-                token ? (
+                token || Auth.isAuthenticated() ? (
                     children
                 ) : (
                     <Redirect
