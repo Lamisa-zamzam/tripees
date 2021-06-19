@@ -52,6 +52,8 @@ const OTPForm = () => {
                     setPrevStep={setPrevStep}
                 />
             );
+        case 3:
+            return;
         default:
             return <Home />;
     }

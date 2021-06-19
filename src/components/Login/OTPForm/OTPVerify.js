@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -16,6 +16,7 @@ const OTPVerify = ({
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/dashboard" } };
     axios.defaults.withCredentials = true;
+    const [err, setErr] = useState("");
     const ConfirmOTP = () => {
         const data = {
             phone: value.phone,
@@ -32,7 +33,8 @@ const OTPVerify = ({
                 }
             })
             .catch((error) => {
-                console.log(error.response.data);
+                // Set error
+                setErr(error.response.data.msg);
             });
     };
     const Back = () => {
@@ -46,6 +48,7 @@ const OTPVerify = ({
     } = useForm();
     return (
         <div>
+            {err && <span className="error">{err}</span>}
             <Form onSubmit={handleSubmit(ConfirmOTP)} className="login-form">
                 <Form.Group>
                     <Form.Label>Your OTP</Form.Label>
