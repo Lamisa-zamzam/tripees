@@ -142,8 +142,8 @@ const Register = () => {
                                     <Form.Control
                                         {...register("password", {
                                             required: true,
-                                            pattern:
-                                                /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,20}$/,
+                                            // pattern:
+                                            //     /^(?=.*\d)(?=(.*\W){2})(?=.*[a-zA-Z])(?!.*\s).{1,15}$/,
                                         })}
                                         type="password"
                                         placeholder="Your Password"
@@ -166,8 +166,8 @@ const Register = () => {
                                     <Form.Control
                                         {...register("confirmPass", {
                                             required: true,
-                                            pattern:
-                                                /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,20}$/,
+                                            // pattern:
+                                            //     /^(?=.*\d)(?=(.*\W){2})(?=.*[a-zA-Z])(?!.*\s).{1,15}$/,
                                         })}
                                         type="password"
                                         placeholder="Your Password"

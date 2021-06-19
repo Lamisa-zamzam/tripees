@@ -111,8 +111,8 @@ const Login = () => {
                                         placeholder="Your Password"
                                         {...register("password", {
                                             required: true,
-                                            pattern:
-                                                /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,20}$/,
+                                            // pattern:
+                                            //     /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,20}$/,
                                         })}
                                     />
                                     {errors.password && (
