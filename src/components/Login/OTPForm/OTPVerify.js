@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useHistory, useLocation } from "react-router-dom";
 
 const OTPVerify = ({
     value,
@@ -10,6 +11,10 @@ const OTPVerify = ({
     setNextStep,
     setPrevStep,
 }) => {
+    // Routing Variables
+    let history = useHistory();
+    let location = useLocation();
+    let { from } = location.state || { from: { pathname: "/dashboard" } };
     axios.defaults.withCredentials = true;
     const ConfirmOTP = () => {
         const data = {
@@ -17,11 +22,14 @@ const OTPVerify = ({
             hash: value.hash,
             otp: value.otp,
         };
-        setNextStep();
         axios
             .post("http://localhost:5000/verifyOTP", data)
             .then((res) => {
-                console.log(res.data);
+                if (res.data.msg === "device verified") {
+                    window.location.reload();
+                    // Redirect user in the requested route
+                    history.replace(from);
+                }
             })
             .catch((error) => {
                 console.log(error.response.data);

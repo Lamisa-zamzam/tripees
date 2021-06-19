@@ -19,14 +19,11 @@ class Auth {
         }
         if (!accessToken && refreshToken) {
             axios
-                .post("http://localhost:5000/refresh", {
+                .post("http://localhost:5000/refres", {
                     withCredentials: true,
                 })
-                .then(function (res) {
-                    console.log(res.data);
-                })
-                .catch(function (error) {
-                    console.log(error.response);
+                .catch((error) => {
+                    alert(error);
                 });
         }
     }

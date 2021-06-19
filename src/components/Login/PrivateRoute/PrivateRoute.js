@@ -3,6 +3,7 @@ import Auth from "../../../auth";
 
 const PrivateRoute = ({ children, ...rest }) => {
     const token = localStorage.getItem("authToken");
+    Auth.isAuthenticated();
     return (
         <Route
             {...rest}

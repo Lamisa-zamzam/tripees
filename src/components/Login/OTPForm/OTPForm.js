@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import OTPVerify from "./OTPVerify";
 import PhoneNumber from "./PhoneNumber";
+import Home from "../../Home/Home";
 
 const OTPForm = () => {
     const [userInfo, setUserInfo] = useState({
@@ -52,7 +53,7 @@ const OTPForm = () => {
                 />
             );
         default:
-            return;
+            return <Home />;
     }
 };
 

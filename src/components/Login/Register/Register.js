@@ -12,6 +12,9 @@ import "../Login/Login.css";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import auth from "../../../auth";
+import OTPForm from "../OTPForm/OTPForm";
+
 const Register = () => {
     // Error state
     const [password, setPassword] = useState("");
@@ -32,7 +35,7 @@ const Register = () => {
 
     // If the user is already logged in, doesn't make sense to show him/her the register page again
     useEffect(() => {
-        if (localStorage.getItem("authToken")) {
+        if (localStorage.getItem("authToken") || auth.isAuthenticated()) {
             history.replace(from);
         }
     }, [history, from]);
@@ -95,6 +98,7 @@ const Register = () => {
                             <br />
                             <br />
                             {err && <span className="error">{err}</span>}
+                            <OTPForm />
                             <Form
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="login-form"

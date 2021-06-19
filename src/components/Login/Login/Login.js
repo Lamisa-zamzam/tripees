@@ -12,6 +12,9 @@ import "./Login.css";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import OTPForm from "../OTPForm/OTPForm";
+import auth from "../../../auth";
+
 const Login = () => {
     // Error State
     const [err, setErr] = useState("");
@@ -23,7 +26,7 @@ const Login = () => {
 
     // If the user is already logged in, doesn't make sense to show him/her the login page again
     useEffect(() => {
-        if (localStorage.getItem("authToken")) {
+        if (localStorage.getItem("authToken") || auth.isAuthenticated()) {
             history.replace(from);
         }
     }, [history, from]);
@@ -73,11 +76,12 @@ const Login = () => {
                             </h1>
                         </Col>
                         <Col className="form-column" md={5}>
-                            <h4 className="underlineHeading">Sign Up</h4>
+                            <h4 className="underlineHeading">Sign In</h4>
                             <FontAwesomeIcon icon={faTimes} size="1x" />
                             <br />
                             <br />
                             {err && <span className="error">{err}</span>}
+                            <OTPForm />
                             <Form
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="login-form"
