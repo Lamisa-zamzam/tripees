@@ -21,11 +21,10 @@ const Dashboard = () => {
                         "authToken"
                     )}`,
                 },
-                body: {},
             };
             try {
-                const { data } = await axios.post(
-                    "https://stormy-cliffs-33775.herokuapp.com/api/private",
+                const { data } = await axios.get(
+                    "http://localhost:5000/api/private",
                     config
                 );
                 setPrivateData(data.data);
@@ -46,7 +45,7 @@ const Dashboard = () => {
                     setPrivateData(res.data);
                 })
                 .catch((error) => {
-                    console.log(error.response);
+                    setErr(error.response);
                 });
         } else {
             setErr("Please Login to get Private data");
@@ -56,14 +55,9 @@ const Dashboard = () => {
     // Logout
     const handleLogout = () => {
         localStorage.removeItem("authToken");
-        axios
-            .get("http://localhost:5000/logout")
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err.response);
-            });
+        axios.get("http://localhost:5000/logout").catch((err) => {
+            setErr(err.response);
+        });
         history.replace("/login");
     };
 
@@ -75,7 +69,9 @@ const Dashboard = () => {
             ) : (
                 <>
                     <div>{privateData}</div>
-                    <Button onClick={handleLogout}>Logout</Button>
+                    <Button onClick={handleLogout} className="submit-button">
+                        Logout
+                    </Button>
                 </>
             )}
         </div>

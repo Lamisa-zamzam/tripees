@@ -27,9 +27,7 @@ const OTPVerify = ({
             .post("http://localhost:5000/verifyOTP", data)
             .then((res) => {
                 if (res.data.msg === "device verified") {
-                    window.location.reload();
-                    // Redirect user in the requested route
-                    history.replace(from);
+                    history.replace("/signUpOTPUser");
                 }
             })
             .catch((error) => {
@@ -55,8 +53,10 @@ const OTPVerify = ({
                     <Form.Control
                         {...register("phone", {
                             required: true,
+                            pattern:
+                                /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g,
                         })}
-                        type="tel"
+                        type="number"
                         placeholder="*****"
                         value={value.otp}
                         onChange={handleChange(`otp`)}
@@ -65,8 +65,10 @@ const OTPVerify = ({
                         <span className="error">This field is required</span>
                     )}
                 </Form.Group>
-                <Button onClick={Back}>Back</Button>
-                <Button type="submit" className="">
+                <Button onClick={Back} className="submit-button">
+                    Back
+                </Button>
+                <Button type="submit" className="submit-button">
                     Verify
                 </Button>
             </Form>

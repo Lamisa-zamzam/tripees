@@ -39,7 +39,7 @@ const Login = () => {
     // Handle submit
     const onSubmit = async (data) => {
         // Send request to get JWT token
-        fetch("https://stormy-cliffs-33775.herokuapp.com/api/auth/login", {
+        fetch("http://localhost:5000/api/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -93,6 +93,8 @@ const Login = () => {
                                         placeholder="e.g. johndoe@gmail.com"
                                         {...register("email", {
                                             required: true,
+                                            pattern:
+                                                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                         })}
                                     />
                                     {errors.price && (
@@ -107,7 +109,11 @@ const Login = () => {
                                     <Form.Control
                                         type="password"
                                         placeholder="Your Password"
-                                        {...register("password")}
+                                        {...register("password", {
+                                            required: true,
+                                            pattern:
+                                                /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,20}$/,
+                                        })}
                                     />
                                     {errors.password && (
                                         <span className="error">

@@ -18,13 +18,12 @@ const PhoneNumber = ({
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 const hash = data.hash;
                 hashHandleChange(hash);
             })
             .catch((error) => {
                 // Set error
-                setErr(error.response.data.msg);
+                setErr(error);
                 setTimeout(() => {
                     setErr("");
                 }, 5000);
@@ -44,6 +43,8 @@ const PhoneNumber = ({
                     <Form.Control
                         {...register("phone", {
                             required: true,
+                            pattern:
+                                /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g,
                         })}
                         type="tel"
                         placeholder="**************"
@@ -51,10 +52,12 @@ const PhoneNumber = ({
                         onChange={handleChange(`phone`)}
                     />
                     {errors.phone && (
-                        <span className="error">This field is required</span>
+                        <span className="error">
+                            This field is required and must be valid
+                        </span>
                     )}
                 </Form.Group>
-                <Button type="submit" className="">
+                <Button type="submit" className="submit-button">
                     Send OTP
                 </Button>
             </Form>

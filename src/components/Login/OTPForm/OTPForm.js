@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import OTPVerify from "./OTPVerify";
 import PhoneNumber from "./PhoneNumber";
 import Home from "../../Home/Home";
+import SignUpOTPUser from "../SignUpOTPUser/SignUpOTPUser";
 
 const OTPForm = () => {
     const [userInfo, setUserInfo] = useState({
@@ -14,6 +15,7 @@ const OTPForm = () => {
 
     const handleChange = (input) => (e) => {
         setUserInfo({ ...userInfo, [input]: e.target.value });
+        if (input === "phone") localStorage.setItem("phone", e.target.value);
     };
 
     const hashHandleChange = (hash) => {
@@ -53,7 +55,7 @@ const OTPForm = () => {
                 />
             );
         case 3:
-            return;
+            return <SignUpOTPUser value={value} />;
         default:
             return <Home />;
     }

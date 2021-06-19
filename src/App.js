@@ -11,6 +11,7 @@ import Home from "./components/Home/Home.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Private Route
 import PrivateRoute from "./components/Login/PrivateRoute/PrivateRoute";
+import SignUpOTPUser from "./components/Login/SignUpOTPUser/SignUpOTPUser.js";
 
 const App = () => {
     return (
@@ -19,9 +20,9 @@ const App = () => {
                 <Route exact path="/">
                     <Home />
                 </Route>
-
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
+                <Route path="/signUpOTPUser" component={SignUpOTPUser} />
                 <PrivateRoute path="/forgotPassword">
                     <ForgotPassword />
                 </PrivateRoute>

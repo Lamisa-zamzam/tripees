@@ -55,7 +55,7 @@ const Register = () => {
         }
 
         // Send data to save into DB
-        fetch("https://stormy-cliffs-33775.herokuapp.com/api/auth/register", {
+        fetch("http://localhost:5000/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -123,13 +123,16 @@ const Register = () => {
                                     <Form.Control
                                         {...register("email", {
                                             required: true,
+                                            pattern:
+                                                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                         })}
                                         type="email"
                                         placeholder="e.g. johndoe@gmail.com"
                                     />
                                     {errors.email && (
                                         <span className="error">
-                                            This field is required
+                                            This field is required and must be
+                                            valid
                                         </span>
                                     )}
                                 </Form.Group>
@@ -139,6 +142,8 @@ const Register = () => {
                                     <Form.Control
                                         {...register("password", {
                                             required: true,
+                                            pattern:
+                                                /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,20}$/,
                                         })}
                                         type="password"
                                         placeholder="Your Password"
@@ -149,7 +154,9 @@ const Register = () => {
                                     />
                                     {errors.password && (
                                         <span className="error">
-                                            This field is required
+                                            This field is required, must contain
+                                            at least 6 characters, 1 uppercase
+                                            and 1 lowercase letters
                                         </span>
                                     )}
                                 </Form.Group>
@@ -159,6 +166,8 @@ const Register = () => {
                                     <Form.Control
                                         {...register("confirmPass", {
                                             required: true,
+                                            pattern:
+                                                /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,20}$/,
                                         })}
                                         type="password"
                                         placeholder="Your Password"
