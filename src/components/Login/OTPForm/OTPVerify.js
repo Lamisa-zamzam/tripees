@@ -17,9 +17,11 @@ const OTPVerify = ({
     let { from } = location.state || { from: { pathname: "/dashboard" } };
     axios.defaults.withCredentials = true;
     const [err, setErr] = useState("");
+    const phone = localStorage.getItem("phone");
     const ConfirmOTP = () => {
+        console.log("phone", value.phone);
         const data = {
-            phone: value.phone,
+            phone: phone,
             hash: value.hash,
             otp: value.otp,
         };
