@@ -15,6 +15,8 @@ const PhoneNumber = ({
     const [err, setErr] = useState("");
     const Continue = () => {
         if (!phoneNum) {
+            console.log(phoneNum);
+            localStorage.setItem("phone", phoneNum);
             setErr("Please provide your phone number");
         } else {
             fetch("http://localhost:5000/sendOT", {
