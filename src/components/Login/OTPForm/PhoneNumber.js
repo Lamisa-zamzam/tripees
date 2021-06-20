@@ -17,19 +17,16 @@ const PhoneNumber = ({
         if (!phoneNum) {
             setErr("Please provide your phone number");
         } else {
-            console.log(phoneNum);
             localStorage.setItem("phone", phoneNum);
-            fetch("http://localhost:5000/sendOT", {
+            fetch("https://stormy-cliffs-33775.herokuapp.com/sendOT", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ phone: phoneNum }),
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data);
                     setErr("");
                     setNextStep();
-                    console.log(data.hash);
                     const hash = data.hash;
                     hashHandleChange(hash);
                 })

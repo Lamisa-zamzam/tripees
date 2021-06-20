@@ -19,22 +19,19 @@ const OTPVerify = ({
     const [err, setErr] = useState("");
     const phone = localStorage.getItem("phone");
     const ConfirmOTP = () => {
-        console.log("phone", value.hash);
         const data = {
             phone: phone,
             hash: value.hash,
             otp: value.otp,
         };
         axios
-            .post("http://localhost:5000/verifyOTP", data)
+            .post("https://stormy-cliffs-33775.herokuapp.com/verifyOTP", data)
             .then((res) => {
                 if (res.data.msg === "device verified") {
-                    console.log(res.data.msg);
                     history.replace("/signUpOTPUser");
                 }
             })
             .catch((error) => {
-                console.log(error);
                 // Set error
                 setErr(error.response.data.msg);
             });
