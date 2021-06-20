@@ -32,9 +32,9 @@ const PhoneNumber = ({
                 .catch((error) => {
                     // Set error
                     setErr(error);
-                    setTimeout(() => {
-                        setErr("");
-                    }, 5000);
+                    // setTimeout(() => {
+                    //     setErr("");
+                    // }, 5000);
                 });
         }
     };
