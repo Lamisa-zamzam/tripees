@@ -26,9 +26,10 @@ const OTPVerify = ({
             otp: value.otp,
         };
         axios
-            .post("https://stormy-cliffs-33775.herokuapp.com/verifyOTP", data)
+            .post("http://localhost:5000/verifyOTP", data)
             .then((res) => {
                 if (res.data.msg === "device verified") {
+                    console.log(res.data.msg);
                     history.replace("/signUpOTPUser");
                 }
             })
