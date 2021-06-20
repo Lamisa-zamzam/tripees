@@ -24,11 +24,9 @@ const Login = () => {
     let { from } = location.state || { from: { pathname: "/dashboard" } };
 
     // If the user is already logged in, doesn't make sense to show him/her the login page again
-    useEffect(() => {
-        if (localStorage.getItem("authToken")) {
-            history.replace(from);
-        }
-    }, [history, from]);
+    if (localStorage.getItem("authToken")) {
+        history.replace(from);
+    }
     // React Hook form vars
     const {
         register,

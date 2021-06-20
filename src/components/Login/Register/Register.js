@@ -33,11 +33,9 @@ const Register = () => {
     let { from } = location.state || { from: { pathname: "/dashboard" } };
 
     // If the user is already logged in, doesn't make sense to show him/her the register page again
-    useEffect(() => {
-        if (localStorage.getItem("authToken")) {
-            history.replace(from);
-        }
-    }, [history, from]);
+    if (localStorage.getItem("authToken")) {
+        history.replace(from);
+    }
     // Handle form submit
     const onSubmit = async (data) => {
         // If passwords mismatch

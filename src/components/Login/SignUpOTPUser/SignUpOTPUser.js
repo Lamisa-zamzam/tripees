@@ -75,10 +75,6 @@ const SignUpOTPUser = () => {
                             if (data.success === false) {
                                 // Set error
                                 setErr(data.error);
-                                // Empty the error after 5 seconds
-                                setTimeout(() => {
-                                    setErr("");
-                                }, 5000);
                             } else {
                                 // Save token in the local storage
                                 localStorage.setItem("authToken", data.token);
