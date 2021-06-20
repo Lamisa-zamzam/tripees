@@ -19,7 +19,7 @@ const OTPVerify = ({
     const [err, setErr] = useState("");
     const phone = localStorage.getItem("phone");
     const ConfirmOTP = () => {
-        console.log("phone", value.phone);
+        console.log("phone", value.hash);
         const data = {
             phone: phone,
             hash: value.hash,

@@ -17,7 +17,7 @@ const PhoneNumber = ({
         if (!phoneNum) {
             setErr("Please provide your phone number");
         } else {
-            fetch("http://localhost:5000/sendOTP", {
+            fetch("http://localhost:5000/sendOT", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ phone: phoneNum }),
@@ -27,6 +27,7 @@ const PhoneNumber = ({
                     console.log(data);
                     setErr("");
                     setNextStep();
+                    console.log(data.hash);
                     const hash = data.hash;
                     hashHandleChange(hash);
                 })
