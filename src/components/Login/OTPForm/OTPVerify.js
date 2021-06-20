@@ -34,6 +34,7 @@ const OTPVerify = ({
                 }
             })
             .catch((error) => {
+                console.log(error);
                 // Set error
                 setErr(error.response.data.msg);
             });
@@ -54,13 +55,11 @@ const OTPVerify = ({
                 <Form.Group>
                     <Form.Label>Your OTP</Form.Label>
                     <Form.Control
-                        {...register("phone", {
+                        {...register("otp", {
                             required: true,
-                            pattern:
-                                /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g,
                         })}
                         type="number"
-                        placeholder="*****"
+                        placeholder="******"
                         value={value.otp}
                         onChange={handleChange(`otp`)}
                     />
