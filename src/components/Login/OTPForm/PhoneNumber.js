@@ -16,9 +16,6 @@ const PhoneNumber = ({
     const Continue = () => {
         if (!phoneNum) {
             setErr("Please provide your phone number");
-            setTimeout(() => {
-                setErr("");
-            }, 5000);
         } else {
             fetch("https://stormy-cliffs-33775.herokuapp.com/sendOTP", {
                 method: "POST",
@@ -27,6 +24,7 @@ const PhoneNumber = ({
             })
                 .then((res) => res.json())
                 .then((data) => {
+                    setErr("");
                     setNextStep();
                     const hash = data.hash;
                     hashHandleChange(hash);
