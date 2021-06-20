@@ -42,6 +42,7 @@ const OTPForm = () => {
                     hashHandleChange={hashHandleChange}
                     handleChange={handleChange}
                     value={value}
+                    setPrevStep={setPrevStep}
                 />
             );
         case 2:
