@@ -13,7 +13,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import OTPForm from "../OTPForm/OTPForm";
-import auth from "../../../auth";
 
 const Login = () => {
     // Error State
@@ -26,7 +25,7 @@ const Login = () => {
 
     // If the user is already logged in, doesn't make sense to show him/her the login page again
     useEffect(() => {
-        if (localStorage.getItem("authToken") || auth.isAuthenticated()) {
+        if (localStorage.getItem("authToken")) {
             history.replace(from);
         }
     }, [history, from]);
@@ -39,7 +38,7 @@ const Login = () => {
     // Handle submit
     const onSubmit = async (data) => {
         // Send request to get JWT token
-        fetch("http://localhost:5000/api/auth/login", {
+        fetch("https://stormy-cliffs-33775.herokuapp.com/api/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -81,7 +80,7 @@ const Login = () => {
                             <br />
                             <br />
                             {err && <span className="error">{err}</span>}
-                            <OTPForm />
+                            <OTPForm page="login" />
                             <Form
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="login-form"

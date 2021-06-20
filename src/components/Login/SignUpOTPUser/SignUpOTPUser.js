@@ -54,7 +54,7 @@ const SignUpOTPUser = () => {
     // If the user already exists in DB, he/she will not see this page
     // We show it to users to get their username
     useEffect(() => {
-        fetch("http://localhost:5000/checkPhone", {
+        fetch("https://stormy-cliffs-33775.herokuapp.com/checkPhone", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ phone }),
@@ -62,7 +62,30 @@ const SignUpOTPUser = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data.msg === "user found") {
-                    history.replace(from);
+                    fetch(
+                        "https://stormy-cliffs-33775.herokuapp.com/api/auth/login",
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ phone }),
+                        }
+                    )
+                        .then((res) => res.json())
+                        .then((data) => {
+                            if (data.success === false) {
+                                // Set error
+                                setErr(data.error);
+                                // Empty the error after 5 seconds
+                                setTimeout(() => {
+                                    setErr("");
+                                }, 5000);
+                            } else {
+                                // Save token in the local storage
+                                localStorage.setItem("authToken", data.token);
+                                // Redirect user in the requested route
+                                history.replace(from);
+                            }
+                        });
                 }
             });
     }, [phone, history, from]);

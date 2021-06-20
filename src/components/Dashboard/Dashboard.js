@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
-import auth from "../../auth";
 
 const Dashboard = () => {
     // Error state
@@ -36,18 +35,7 @@ const Dashboard = () => {
         };
 
         if (localStorage.getItem("authToken")) fetchPrivateData();
-        else if (auth.isAuthenticated()) {
-            axios
-                .post("http://localhost:5000/home", {
-                    withCredentials: true,
-                })
-                .then((res) => {
-                    setPrivateData(res.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        } else {
+        else {
             setErr("Please Login to get Private data");
         }
     }, [privateData]);
@@ -55,11 +43,6 @@ const Dashboard = () => {
     // Logout
     const handleLogout = () => {
         localStorage.removeItem("authToken");
-        axios
-            .get("https://stormy-cliffs-33775.herokuapp.com/logout")
-            .catch((err) => {
-                setErr(err.response);
-            });
         history.replace("/login");
     };
 

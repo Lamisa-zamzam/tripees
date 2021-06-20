@@ -12,7 +12,6 @@ import "../Login/Login.css";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import auth from "../../../auth";
 import OTPForm from "../OTPForm/OTPForm";
 
 const Register = () => {
@@ -35,7 +34,7 @@ const Register = () => {
 
     // If the user is already logged in, doesn't make sense to show him/her the register page again
     useEffect(() => {
-        if (localStorage.getItem("authToken") || auth.isAuthenticated()) {
+        if (localStorage.getItem("authToken")) {
             history.replace(from);
         }
     }, [history, from]);
@@ -55,7 +54,7 @@ const Register = () => {
         }
 
         // Send data to save into DB
-        fetch("http://localhost:5000/api/auth/register", {
+        fetch("https://stormy-cliffs-33775.herokuapp.com/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),

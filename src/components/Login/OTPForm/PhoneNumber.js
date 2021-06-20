@@ -18,6 +18,7 @@ const PhoneNumber = ({
         })
             .then((res) => res.json())
             .then((data) => {
+                console.log(data);
                 const hash = data.hash;
                 hashHandleChange(hash);
             })
