@@ -9,10 +9,6 @@ const Home = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Accept: "/",
-                    "Accept-Encoding": "gzip, deflate, br",
-                    "User-Agent": "PostmanRuntime/7.28.1",
-                    "Access-Control-Allow-Origin": "*",
                 },
                 body: {
                     ClientId: "ApiIntegrationNew",
@@ -24,9 +20,7 @@ const Home = () => {
             }
         )
             .then((res) => {
-                if (res.containsHeader("Access-Control-Allow-Origin")) {
-                    res.addHeader("Access-Control-Allow-Origin", "*");
-                }
+                res.json();
             })
             .then((data) => console.log(data));
     }, []);
