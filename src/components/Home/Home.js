@@ -4,18 +4,30 @@ const Home = () => {
     const [hotels, setHotels] = useState(null);
     useEffect(() => {
         fetch(
-            "https://api.tektravels.com/SharedServices/SharedData.svc/rest/Authenticate",
+            "http://api.tektravels.com/SharedServices/SharedData.svc/rest/Authenticate",
             {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "/",
+                    "Accept-Encoding": "gzip, deflate, br",
+                    "User-Agent": "PostmanRuntime/7.28.1",
+                    "Access-Control-Allow-Origin": "*",
+                },
                 body: {
                     ClientId: "ApiIntegrationNew",
                     UserName: "HARE",
                     Password: "HARE@1234",
-                    EndUserIp: "192.168.11.120",
+                    LoginType: "2",
+                    EndUserIp: "103.195.184.237",
                 },
             }
         )
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.containsHeader("Access-Control-Allow-Origin")) {
+                    res.addHeader("Access-Control-Allow-Origin", "*");
+                }
+            })
             .then((data) => console.log(data));
     }, []);
     return (
