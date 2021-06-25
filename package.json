@@ -1,6 +1,5 @@
 {
     "name": "tripees",
-    "proxy": "https://api.tektravels.com/SharedServices/SharedData.svc/rest/Authenticate",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
