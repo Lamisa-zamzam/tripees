@@ -15,7 +15,6 @@ const OTPVerify = ({
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/dashboard" } };
-    axios.defaults.withCredentials = true;
     const [err, setErr] = useState("");
     const phone = localStorage.getItem("phone");
     const ConfirmOTP = () => {
@@ -33,7 +32,8 @@ const OTPVerify = ({
             })
             .catch((error) => {
                 // Set error
-                setErr(error.response.data.msg);
+                // setErr(error.response.data.msg);
+                console.log(error);
             });
     };
     const Back = () => {
